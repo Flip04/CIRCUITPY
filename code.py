@@ -7,7 +7,7 @@ import adafruit_irremote
 from adafruit_motor import motor
 
 
-# IR Receiver an den entsprechenden Pin anschließen (z. B. D6)
+# IR Receiver an den entsprechenden Pin anschließen (z. B. D27)
 ir_receiver = pulseio.PulseIn(board.GP27, maxlen=100, idle_state=True)
 decoder = adafruit_irremote.GenericDecode()
 
