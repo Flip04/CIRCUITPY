@@ -7,9 +7,8 @@ import adafruit_irremote
 from adafruit_motor import motor
 
 
-
 # ------------------------------------- IR Receiver -------------------------------------
-ir_receiver = pulseio.PulseIn(board.GP27, maxlen=100, idle_state=True)
+ir_receiver = pulseio.PulseIn(board.GP8, maxlen=100, idle_state=True)
 decoder = adafruit_irremote.GenericDecode()
 
 # ------------------------------------- Motor -------------------------------------------
@@ -24,7 +23,7 @@ motor1 = motor.DCMotor(pwmio.PWMOut(M1_A, frequency=500), pwmio.PWMOut(M1_B, fre
 # pins
 leds = [
     digitalio.DigitalInOut(board.GP26),
-    digitalio.DigitalInOut(board.GP8),
+    digitalio.DigitalInOut(board.GP27),
     digitalio.DigitalInOut(board.GP28)]
 
 # set digital pin to out
@@ -42,7 +41,8 @@ def hpLedsReset():
 
 my_health = 3
 def decrease_health():
-    my_health = my_health - 1
+    global my_health
+    my_health -= 1
     leds[my_health].value = False
     # play sound?
     motor1.throttle = 1
