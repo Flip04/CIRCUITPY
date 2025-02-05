@@ -42,20 +42,24 @@ def hpLedsReset():
 my_health = 3
 def decrease_health():
     global my_health
-    my_health -= 1
-    leds[my_health].value = False
-    # play sound?
-    motor1.throttle = 1
-    time.sleep(0.2)
-    motor1.throttle = 0
-    time.sleep(0.2)
-    motor1.throttle = 1
-    time.sleep(0.2)
-    motor1.throttle = 0
-    time.sleep(0.2)
-    motor1.throttle = 1
-    time.sleep(0.2)
-    motor1.throttle = 0
+    if my_health == 0:
+        # well you're dead
+        return
+    else:
+        my_health -= 1
+        leds[my_health].value = False
+        # play sound?
+        motor1.throttle = 1
+        time.sleep(0.2)
+        motor1.throttle = 0
+        time.sleep(0.2)
+        motor1.throttle = 1
+        time.sleep(0.2)
+        motor1.throttle = 0
+        time.sleep(0.2)
+        motor1.throttle = 1
+        time.sleep(0.2)
+        motor1.throttle = 0
 
 
 
