@@ -7,7 +7,7 @@ import board, busio
 from lcd.lcd import LCD
 from lcd.i2c_pcf8574_interface import I2CPCF8574Interface
 
-i2c = busio.I2C(board.GP17, board.GP16)
+i2c = busio.I2C(board.GP21, board.GP20)
 lcd = LCD(I2CPCF8574Interface(i2c, 0x27), num_rows=2, num_cols=16)
 
 lcd.clear()

@@ -13,17 +13,15 @@ BLUE = (0, 0, 255)
 BLACK = (0,0,0)
 WHITE = (255,150,120)
 
-numpixels = 60
-pixels = neopixel.NeoPixel(board.GP13, numpixels, brightness=1, auto_write=False) #z.B. 1 Pixel an pin GP14 (der Mond)
+numpixels = 1
+pixels = neopixel.NeoPixel(board.GP14, numpixels, brightness=1, auto_write=False) #z.B. 1 Pixel an pin GP14 (der Mond)
 
 while True:
 
 
     
-    pixels[2] = WHITE
+    pixels.fill(RED)  #set all pixels to green
     pixels.show()
     time.sleep(0.5)
-    pixels[2] = BLACK
-    pixels.show()
-    time.sleep(0.5)
+
 

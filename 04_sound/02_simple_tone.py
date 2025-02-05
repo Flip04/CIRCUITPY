@@ -9,7 +9,7 @@ frequencies = [
     1046.50, 1174.66, 1318.51, 1396.91, 1567.98, 1760.00, 1975.53  # Oktave 3 (C6 bis H6)
 ]
 
-speaker = pwmio.PWMOut(board.GP18, duty_cycle=2**15, variable_frequency=True)
+speaker = pwmio.PWMOut(board.GP12, duty_cycle=2**15, variable_frequency=True)
 speaker.frequency = 400
 
 bpm = 120

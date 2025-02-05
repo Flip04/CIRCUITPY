@@ -5,6 +5,7 @@ import pwmio
 import digitalio
 import adafruit_irremote
 from adafruit_motor import motor
+import audiomp3, audiopwmio
 
 
 # ------------------------------------- IR Receiver -------------------------------------
@@ -17,6 +18,10 @@ M1_B = board.GP1
 motor1 = motor.DCMotor(pwmio.PWMOut(M1_A, frequency=500), pwmio.PWMOut(M1_B, frequency=500))
 
 # ------------------------------------- Speaker? ----------------------------------------
+
+audio = audiopwmio.PWMAudioOut(board.GP3) #Lautsprecher an Pin GP4 (D4)
+kill_mp3 = audiomp3.MP3Decoder(open("04_sound/kill_loud.mp3", "rb"))
+ace_mp3 = audiomp3.MP3Decoder(open("04_sound/ace_loud.mp3", "rb"))
 
 # ------------------------------------- LEDs --------------------------------------------
 
@@ -48,17 +53,22 @@ def decrease_health():
     else:
         my_health -= 1
         leds[my_health].value = False
-        # play sound?
+        # play sound
+        if my_health == 0:
+            audio.play(ace_mp3)
+        else:
+            audio.play(kill_mp3)
+        throttle_interval = 0.05
         motor1.throttle = 1
-        time.sleep(0.2)
+        time.sleep(throttle_interval*2)
         motor1.throttle = 0
-        time.sleep(0.2)
+        time.sleep(throttle_interval)
         motor1.throttle = 1
-        time.sleep(0.2)
+        time.sleep(throttle_interval*2)
         motor1.throttle = 0
-        time.sleep(0.2)
+        time.sleep(throttle_interval)
         motor1.throttle = 1
-        time.sleep(0.2)
+        time.sleep(throttle_interval*2)
         motor1.throttle = 0
 
 
