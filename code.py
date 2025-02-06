@@ -36,10 +36,15 @@ def hpLedsInit():
     for i in range(3):
         leds[i].direction = digitalio.Direction.OUTPUT
 
-# all leds should start on (3hp)
-def hpLedsReset():
+# turn on all leds
+def hpLedsOn():
     for i in range(3):
         leds[i].value = True
+        
+# turn off all leds
+def hpLedsOff():
+    for i in range(3):
+        leds[i].value = False
 
         
 # ------------------------------------- Health ------------------------------------------
@@ -70,6 +75,26 @@ def decrease_health():
         motor1.throttle = 1
         time.sleep(throttle_interval*2)
         motor1.throttle = 0
+        if my_health == 0:
+            reset()
+
+
+# ------------------------------------- reset -------------------------------------------
+
+def reset():
+    time.sleep(2)
+    blink_times = 6
+    for i in range(blink_times):
+        delay = 0.5
+        hpLedsOn()
+        time.sleep(delay)
+        hpLedsOff()
+        time.sleep(delay)
+    for i in range(3):
+        leds[i].value = True
+        time.sleep(0.187)
+    global my_health
+    my_health = 3
 
 
 
@@ -90,6 +115,6 @@ def run():
 
 # public static void main(string[] args)
 hpLedsInit()
-hpLedsReset()
+hpLedsOn()
 while True:
     run()
